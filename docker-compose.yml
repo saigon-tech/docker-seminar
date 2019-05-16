@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  server:
+    container_name: docker-server
+    build: ./docker/centos
+    volumes:
+      - ./web:/srv
+    ports:
+      - 80:80
+    working_dir: /srv
+
+  db:
+    container_name: docker-db
+    build: ./docker/db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  composer:
+    container_name: docker-composer
+    image: composer:1.6
+    command: 'tail -f /dev/null'
+    volumes:
+      - ./web:/app
