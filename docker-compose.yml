@@ -26,6 +26,20 @@ services:
     ports:
       - 3306:3306
 
+  db2:
+    container_name: docker-db2
+    build: ./docker/db2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./docker/db2/data:/var/lib/mysql
+    ports:
+      - 3307:3306
+
   composer:
     container_name: docker-composer
     image: composer:1.6
