@@ -9,6 +9,8 @@ services:
     ports:
       - 80:80
     working_dir: /srv
+    depends_on:
+      - db
 
   db:
     container_name: docker-db
