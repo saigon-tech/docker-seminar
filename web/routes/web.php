@@ -36,3 +36,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 // |        | GET|HEAD | register               | register         | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest    |
 // |        | POST     | register               |                  | App\Http\Controllers\Auth\RegisterController@register                  | web,guest    |
 // +--------+----------+------------------------+------------------+------------------------------------------------------------------------+--------------+
+
+// Admin route
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'guard' => 'admin'], function () {
+    // Auth
+    Route::get('login', 'LoginController@showLoginForm')->name('admin.login');
+    Route::post('login', 'LoginController@login');
+    Route::post('logout', 'LoginController@logout')->name('admin.logout');
+
+    Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
+});

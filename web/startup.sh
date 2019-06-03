@@ -20,6 +20,7 @@ MIGRATION=`mysqlshow --user=root --password=root --host db docker | grep -v Wild
 if [ "$MIGRATION" == "" ]; then
     php artisan migrate
     php artisan db:seed
+    # php artisan migrate:refresh --seed
 fi
 
 # Run composer

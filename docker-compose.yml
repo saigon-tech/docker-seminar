@@ -43,6 +43,6 @@ services:
   composer:
     container_name: docker-composer
     image: composer:1.6
-    command: 'tail -f /dev/null'
+    command: bash -c 'composer dump-autoload && tail -f /dev/null'
     volumes:
       - ./web:/app
