@@ -19,4 +19,14 @@ return function (App $app) {
         $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
         return $logger;
     };
+
+    // Response not found
+    $container['notFoundHandler'] = function ($c) {
+        return function ($request, $response) use ($c) {
+            return $response->withJson([
+                'status_code' => 400,
+                'error' => 'not_found',
+            ], 404);
+        };
+    };
 };
