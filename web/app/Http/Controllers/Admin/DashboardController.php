@@ -24,6 +24,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $top = \App\Log::groupBy('postal_code')
+            ->select(\DB::raw('count(*) as pc_count, postal_code'))
+            ->orderBy('pc_count', 'desc')
+            ->take(10)
+            ->get()
+            ->toArray();
+        return view('admin.dashboard', [
+            'top' => $top
+        ]);
     }
 }

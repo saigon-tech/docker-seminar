@@ -39,6 +39,7 @@ services:
       - ./docker/db2/data:/var/lib/mysql
     ports:
       - 3307:3306
+      - ./docker/db2/sql:/docker-entrypoint-initdb.d/
 
   composer:
     container_name: docker-composer
