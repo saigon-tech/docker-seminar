@@ -15,17 +15,17 @@ $ docker version
 $ docker info
 
 # Pull and Run Docker image
-$ docker pull hello-world										# Pull "helloworld" image from repo
-$ docker run hello-world										# Run "helloworld"
+$ docker pull hello-world                   # Pull "helloworld" image from repo
+$ docker run hello-world                    # Run "helloworld"
 $ docker run -p 4000:80 helloworld          # Run "helloworld" mapping port 4000 to 80
 $ docker run -d -p 4000:80 helloworld       # Same thing, but in detached mode
 $ docker run -v `pwd`:/src helloworld       # Same thing, with volumn
 
 # List Docker containers
-$ docker ps																	# running
-$ docker ps -a  														# all
-$ docker ps -q  														# running in quiet mode
-$ docker ps -aq															# all in quiet mode
+$ docker ps                                 # running
+$ docker ps -a                              # all
+$ docker ps -q                              # running in quiet mode
+$ docker ps -aq                             # all in quiet mode
 
 # Build from Dockerfile
 $ docker build -t helloworld .              # Create image using this directory's Dockerfile
@@ -39,12 +39,12 @@ $ docker stop $(docker ps -a -q)            # Stop all running containers
 $ docker kill <hash> | <name>               # Force shutdown of the specified container
 $ docker kill $(docker ps -a -q)            # Kill all running containers
 $ docker rm <hash> | <name>                 # Remove specified container from this machine
-$ docker rm $(docker ps -a -q) 							# Remove all containers
+$ docker rm $(docker ps -a -q)              # Remove all containers
 
 # List Docker images
-$ docker images															# List all images on this machine
-$ docker rmi <image id>											# Remove specified image from this machine
-$ docker rmi $(docker images -q) 			 			# Remove all images from this machine
+$ docker images                             # List all images on this machine
+$ docker rmi <image id>                     # Remove specified image from this machine
+$ docker rmi $(docker images -q)            # Remove all images from this machine
 
 # Invididual docker hub
 $ docker login                              # Log in CLI session using your account
@@ -58,19 +58,19 @@ $ docker run username/repository:tag        # Run image from a registry
 ## Useful docker-compose command
 
 ```shell
-$ docker-compose up								# Builds, (re)creates, starts, and attaches to containers
-$ docker-compose up --build				# Build and up
-$ docker-compose up -d						# Up in background
-$ docker-compose down							# Stops and removes containers created by up
+$ docker-compose up               # Builds, (re)creates, starts, and attaches to containers
+$ docker-compose up --build       # Build and up
+$ docker-compose up -d            # Up in background
+$ docker-compose down             # Stops and removes containers created by up
 
-$ docker-compose ps								# Lists containers
-$ docker-compose ps -q						# Only display IDs
+$ docker-compose ps               # Lists containers
+$ docker-compose ps -q            # Only display IDs
 
-$ docker-compose start						# Starts existing containers
-$ docker-compose stop							# Stops running containers without removing them
-$ docker-compose kill							# Forces running containers to stop
+$ docker-compose start            # Starts existing containers
+$ docker-compose stop             # Stops running containers without removing them
+$ docker-compose kill             # Forces running containers to stop
 
-$ docker-compose top							# Displays the running processes.
+$ docker-compose top              # Displays the running processes.
 ```
 
 
