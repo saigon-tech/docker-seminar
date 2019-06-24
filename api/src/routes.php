@@ -13,10 +13,24 @@ return function (App $app) {
             // Log message
             $container->get('logger')->info("Route '/yuubin/random' start");
 
+            // Random yuubin
+            $postalCode = $container->get('db')->table('postal_codes');
+            $limit = $postalCode->count();
+            $yuubin = $postalCode->skip(rand(0, $limit - 1))->take(1)->first();
+            if (!is_null($yuubin)) {
+                unset($yuubin->id);
+                $log = $container->get('db')->table('logs');
+                $log->insert([
+                    'time' => date("Y-m-d H:i:s"),
+                    'postal_code' => $yuubin->postal_code,
+                    'api' => '/yuubin/random',
+                ]);
+            }
+
             // Response json data
             return $response->withJson([
                 'status_code' => 200,
-                'postal_code' => rand(7000000, 900000),
+                'postal_code' => $yuubin,
             ], 200);
         });
 
@@ -25,10 +39,23 @@ return function (App $app) {
             // Log message
             $container->get('logger')->info("Route '/yuubin/get' start");
 
+            // Query yuubin
+            $postalCode = $container->get('db')->table('postal_codes');
+            $yuubin = $postalCode->where('postal_code', $args['postalCode'])->first();
+            if (!is_null($yuubin)) {
+                unset($yuubin->id);
+                $log = $container->get('db')->table('logs');
+                $log->insert([
+                    'time' => date("Y-m-d H:i:s"),
+                    'postal_code' => $yuubin->postal_code,
+                    'api' => '/yuubin/get',
+                ]);
+            }
+
             // Response json data
             return $response->withJson([
                 'status_code' => 200,
-                'postal_code' => $args['postalCode'],
+                'yuubin' => $yuubin,
             ], 200);
         });
     });

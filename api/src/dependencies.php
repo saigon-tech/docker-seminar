@@ -20,6 +20,17 @@ return function (App $app) {
         return $logger;
     };
 
+    // DB connection
+    $container['db'] = function ($c) {
+        $capsule = new \Illuminate\Database\Capsule\Manager;
+        $capsule->addConnection($c->get('settings')['db']);
+
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
+
+        return $capsule;
+    };
+
     // Response not found
     $container['notFoundHandler'] = function ($c) {
         return function ($request, $response) use ($c) {
