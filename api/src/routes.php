@@ -30,7 +30,7 @@ return function (App $app) {
             // Response json data
             return $response->withJson([
                 'status_code' => 200,
-                'postal_code' => $yuubin,
+                'yuubin' => $yuubin,
             ], 200);
         });
 
